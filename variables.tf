@@ -36,6 +36,12 @@ variable "ip_allowlist" {
   default     = ["0.0.0.0/0"]
 }
 
+variable "ssl_certificate_enabled" {
+  description = "A boolean which triggers adding or removing the HTTPS listener"
+  type        = bool
+  default     = false
+}
+
 variable "ssl_certificate_arn" {
   description = "The ARN of an Amazon Certificate Manager certificate to bind to the load balancer"
   type        = string
