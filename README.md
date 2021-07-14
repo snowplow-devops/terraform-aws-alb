@@ -21,6 +21,26 @@ module "collector_lb" {
 }
 ```
 
+### Adding a custom certificate
+
+To add a certificate to the load balancer and therefore enable the TLS endpoint you will need to populate two extra variables:
+
+```hcl
+module "collector_lb" {
+  source = "snowplow-devops/alb/aws"
+
+  name              = "collector-lb"
+  vpc_id            = var.vpc_id
+  subnet_ids        = var.subnet_ids
+  health_check_path = "/health"
+
+  ssl_certificate_arn     = "your-acm-arn-string-here"
+  ssl_certificate_enabled = true
+}
+```
+
+_Note_: `ssl_certificate_enabled` is required to allow for the case where you are creating the ACM certificate in-line with the ALB module as Terraform will not be able to figure out the "count" attribute correctly at plan time.
+
 ## Requirements
 
 | Name | Version |
@@ -60,6 +80,7 @@ No modules.
 | <a name="input_matcher"></a> [matcher](#input\_matcher) | The response codes expected for health checks | `string` | `"200-399"` | no |
 | <a name="input_name"></a> [name](#input\_name) | A name which will be pre-pended to the resources created | `string` | n/a | yes |
 | <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn) | The ARN of an Amazon Certificate Manager certificate to bind to the load balancer | `string` | `""` | no |
+| <a name="input_ssl_certificate_enabled"></a> [ssl\_certificate\_enabled](#input\_ssl\_certificate\_enabled) | A boolean which triggers adding or removing the HTTPS listener | `bool` | `false` | no |
 | <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | The SSL Policy to use (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) | `string` | `"ELBSecurityPolicy-TLS-1-2-2017-01"` | no |
 | <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The list of subnets to deploy the load balancer across | `list(string)` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to append to this resource | `map(string)` | `{}` | no |
@@ -101,5 +122,5 @@ limitations under the License.
 [ci]: https://github.com/snowplow-devops/terraform-aws-alb/actions?query=workflow%3Aci
 [ci-image]: https://github.com/snowplow-devops/terraform-aws-alb/workflows/ci/badge.svg
 
-[license]: http://www.apache.org/licenses/LICENSE-2.0
-[license-image]: http://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
+[license]: https://www.apache.org/licenses/LICENSE-2.0
+[license-image]: https://img.shields.io/badge/license-Apache--2-blue.svg?style=flat
