@@ -16,6 +16,8 @@ resource "aws_security_group" "lb_sg" {
 }
 
 resource "aws_security_group_rule" "lb_sg_ingress_80" {
+  count = var.http_enabled ? 1 : 0
+
   type              = "ingress"
   from_port         = 80
   to_port           = 80
@@ -67,6 +69,8 @@ resource "aws_lb_target_group" "lb_tg_http" {
 }
 
 resource "aws_lb_listener" "lb_listener_http" {
+  count = var.http_enabled ? 1 : 0
+
   load_balancer_arn = aws_lb.lb.id
   port              = "80"
   protocol          = "HTTP"

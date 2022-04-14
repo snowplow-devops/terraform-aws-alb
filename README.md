@@ -21,6 +21,9 @@ module "collector_lb" {
 }
 ```
 
+### Disabling HTTP
+Most Snowplow tracker implementations default to use HTTPS (exceptions include the Python tracker). However, if you want to completely disable communication over HTTP you can manually set `http_enabled = false`.
+
 ### Adding a custom certificate
 
 To add a certificate to the load balancer and therefore enable the TLS endpoint you will need to populate two extra variables:

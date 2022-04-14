@@ -36,6 +36,12 @@ variable "ip_allowlist" {
   default     = ["0.0.0.0/0"]
 }
 
+variable "http_enabled" {
+  description = "A boolean which triggers adding or removing the HTTP listener"
+  type        = bool
+  default     = true
+}
+
 variable "ssl_certificate_enabled" {
   description = "A boolean which triggers adding or removing the HTTPS listener"
   type        = bool
