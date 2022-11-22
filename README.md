@@ -45,14 +45,14 @@ _Note_: `ssl_certificate_enabled` is required to allow for the case where you ar
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 0.15 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.25.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 3.45.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.25.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 3.45.0 |
 
 ## Modules
 
@@ -74,17 +74,17 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_egress_port"></a> [egress\_port](#input\_egress\_port) | The port that the downstream webserver exposes over HTTP | `number` | `8080` | no |
 | <a name="input_health_check_path"></a> [health\_check\_path](#input\_health\_check\_path) | The path to bind for health checks | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | A name which will be pre-pended to the resources created | `string` | n/a | yes |
+| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The list of subnets to deploy the load balancer across | `list(string)` | n/a | yes |
+| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC to deploy the load balancer within | `string` | n/a | yes |
+| <a name="input_egress_port"></a> [egress\_port](#input\_egress\_port) | The port that the downstream webserver exposes over HTTP | `number` | `8080` | no |
 | <a name="input_ip_allowlist"></a> [ip\_allowlist](#input\_ip\_allowlist) | The list of CIDR ranges to allow traffic from | `list(any)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | <a name="input_matcher"></a> [matcher](#input\_matcher) | The response codes expected for health checks | `string` | `"200-399"` | no |
-| <a name="input_name"></a> [name](#input\_name) | A name which will be pre-pended to the resources created | `string` | n/a | yes |
 | <a name="input_ssl_certificate_arn"></a> [ssl\_certificate\_arn](#input\_ssl\_certificate\_arn) | The ARN of an Amazon Certificate Manager certificate to bind to the load balancer | `string` | `""` | no |
 | <a name="input_ssl_certificate_enabled"></a> [ssl\_certificate\_enabled](#input\_ssl\_certificate\_enabled) | A boolean which triggers adding or removing the HTTPS listener | `bool` | `false` | no |
 | <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | The SSL Policy to use (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html) | `string` | `"ELBSecurityPolicy-TLS-1-2-2017-01"` | no |
-| <a name="input_subnet_ids"></a> [subnet\_ids](#input\_subnet\_ids) | The list of subnets to deploy the load balancer across | `list(string)` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | The tags to append to this resource | `map(string)` | `{}` | no |
-| <a name="input_vpc_id"></a> [vpc\_id](#input\_vpc\_id) | The VPC to deploy the load balancer within | `string` | n/a | yes |
 
 ## Outputs
 
@@ -105,7 +105,7 @@ No modules.
 
 # Copyright and license
 
-The Terraform AWS ALB project is Copyright 2021-2021 Snowplow Analytics Ltd.
+The Terraform AWS ALB project is Copyright 2021-2022 Snowplow Analytics Ltd.
 
 Licensed under the [Apache License, Version 2.0][license] (the "License");
 you may not use this software except in compliance with the License.
