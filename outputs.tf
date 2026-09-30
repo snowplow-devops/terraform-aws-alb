@@ -24,7 +24,7 @@ output "zone_id" {
 }
 
 output "listener_http_arn" {
-  value       = aws_lb_listener.lb_listener_http.arn
+  value       = var.http_enabled == "" ? "" : join("", aws_lb_listener.lb_listener_http.*.arn)
   description = "ARN of the HTTP listener"
 }
 
